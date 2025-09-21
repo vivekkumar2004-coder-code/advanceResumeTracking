@@ -1,0 +1,27 @@
+[global]
+
+# Development settings
+developmentMode = false
+
+[server]
+# Server settings
+port = 8501
+baseUrlPath = ""
+enableCORS = false
+enableXsrfProtection = true
+
+# Upload settings
+maxUploadSize = 200
+maxMessageSize = 200
+
+[browser]
+# Browser settings
+gatherUsageStats = false
+
+[theme]
+# Professional theme matching your color palette
+primaryColor = "#1e3a8a"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f8fafc"
+textColor = "#1f2937"
+font = "sans serif"
