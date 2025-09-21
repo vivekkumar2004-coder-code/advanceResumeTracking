@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enhanced Resume Relevance System - Dual Upload Demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
+    <style>
+      /* Demo-specific styles */
+      .demo-header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--primary-light) 100%
+        );
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+      }
+
+      .feature-highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(5, 150, 105, 0.1) 0%,
+          rgba(16, 185, 129, 0.1) 100%
+        );
+        border-left: 4px solid var(--success-color);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: var(--border-radius);
+      }
+
+      .demo-step {
+        background: var(--card-bg);
+        border-radius: var(--border-radius-lg);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .demo-step:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .step-number {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Demo Header -->
+    <div class="demo-header">
+      <div class="container">
+        <div class="text-center">
+          <h1 class="display-4 fw-bold mb-3">
+            <i class="fas fa-rocket me-3"></i>
+            Enhanced Resume Relevance System
+          </h1>
+          <p class="lead mb-4">
+            Professional dual upload system with advanced analysis capabilities
+          </p>
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="feature-highlight">
+                <h5>
+                  <i class="fas fa-star text-warning me-2"></i>New Features
+                </h5>
+                <div class="row">
+                  <div class="col-md-6">
+                    <ul class="list-unstyled">
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i
+                        >Professional Color Palette
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Dual File
+                        Upload System
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Batch
+                        Processing
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <ul class="list-unstyled">
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i
+                        >Interactive Components
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Enhanced
+                        API Endpoints
+                      </li>
+                      <li>
+                        <i class="fas fa-check text-success me-2"></i>Responsive
+                        Design
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Steps -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="text-center mb-5">How to Use the Enhanced System</h2>
+
+          <!-- Step 1: Upload Mode Selection -->
+          <div class="demo-step">
+            <div class="d-flex align-items-center mb-3">
+              <div class="step-number">1</div>
+              <h4 class="mb-0">Choose Upload Mode</h4>
+            </div>
+            <p class="text-muted mb-4">
+              Select from three powerful upload modes based on your needs:
+            </p>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card h-100 border-primary">
+                  <div class="card-body text-center">
+                    <i class="fas fa-file-alt fa-3x text-primary mb-3"></i>
+                    <h5>Standard Upload</h5>
+                    <p>Traditional one job description, multiple resumes</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100 border-success">
+                  <div class="card-body text-center">
+                    <i class="fas fa-files fa-3x text-success mb-3"></i>
+                    <h5>Dual Upload</h5>
+                    <p>Multiple job descriptions × multiple resumes</p>
+                    <span class="badge bg-success">NEW!</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100 border-warning">
+                  <div class="card-body text-center">
+                    <i class="fas fa-layer-group fa-3x text-warning mb-3"></i>
+                    <h5>Batch Process</h5>
+                    <p>Upload and analyze in one step</p>
+                    <span class="badge bg-warning">FASTEST!</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: File Upload -->
+          <div class="demo-step">
+            <div class="d-flex align-items-center mb-3">
+              <div class="step-number">2</div>
+              <h4 class="mb-0">Upload Your Files</h4>
+            </div>
+            <p class="text-muted mb-4">
+              Enhanced drag-and-drop with real-time validation and preview:
+            </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <h6>
+                  <i class="fas fa-briefcase text-primary me-2"></i>Job
+                  Descriptions
+                </h6>
+                <ul class="list-unstyled">
+                  <li>
+                    <i class="fas fa-check text-success me-2"></i>Multiple file
+                    support
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-success me-2"></i>Text input
+                    option
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-success me-2"></i>Real-time
+                    validation
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-success me-2"></i>Visual
+                    feedback
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h6>
+                  <i class="fas fa-user-tie text-success me-2"></i>Resumes
+                </h6>
+                <ul class="list-unstyled">
+                  <li>
+                    <i class="fas fa-check text-success me-2"></i>Batch upload
+                    capability
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-success me-2"></i>File type
+                    detection
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-success me-2"></i>Progress
+                    indicators
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-success me-2"></i>Error handling
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Analysis Configuration -->
+          <div class="demo-step">
+            <div class="d-flex align-items-center mb-3">
+              <div class="step-number">3</div>
+              <h4 class="mb-0">Configure Analysis Options</h4>
+            </div>
+            <p class="text-muted mb-4">
+              Customize your analysis with advanced options:
+            </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <h6>Analysis Features</h6>
+                <div class="form-check form-switch mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    checked
+                    disabled
+                  />
+                  <label class="form-check-label">Skill Analysis</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    checked
+                    disabled
+                  />
+                  <label class="form-check-label">Experience Analysis</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    checked
+                    disabled
+                  />
+                  <label class="form-check-label">Semantic Similarity</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h6>Output Options</h6>
+                <div class="form-check form-switch mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    checked
+                    disabled
+                  />
+                  <label class="form-check-label">Generate Feedback</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    checked
+                    disabled
+                  />
+                  <label class="form-check-label">Comparative Analysis</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    checked
+                    disabled
+                  />
+                  <label class="form-check-label">Cross Analysis Matrix</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Results -->
+          <div class="demo-step">
+            <div class="d-flex align-items-center mb-3">
+              <div class="step-number">4</div>
+              <h4 class="mb-0">View Enhanced Results</h4>
+            </div>
+            <p class="text-muted mb-4">
+              Professional results presentation with comprehensive insights:
+            </p>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="text-center">
+                  <i class="fas fa-chart-line fa-2x text-primary mb-2"></i>
+                  <h6>Analysis Summary</h6>
+                  <p class="small text-muted">
+                    Success rates, processing times, and score distribution
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-center">
+                  <i class="fas fa-table fa-2x text-success mb-2"></i>
+                  <h6>Results Matrix</h6>
+                  <p class="small text-muted">
+                    All job-resume combinations with detailed scores
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="text-center">
+                  <i class="fas fa-comments fa-2x text-warning mb-2"></i>
+                  <h6>AI Feedback</h6>
+                  <p class="small text-muted">
+                    Personalized recommendations for each candidate
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- API Endpoints -->
+          <div class="demo-step">
+            <div class="d-flex align-items-center mb-3">
+              <div class="step-number">5</div>
+              <h4 class="mb-0">New API Endpoints</h4>
+            </div>
+            <p class="text-muted mb-4">
+              Enhanced backend with powerful new endpoints:
+            </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                  <div class="card-body">
+                    <h6 class="card-title text-primary">
+                      <i class="fas fa-upload me-2"></i>Upload Endpoints
+                    </h6>
+                    <ul class="list-unstyled small">
+                      <li>
+                        <code>POST /api/upload/dual</code> - Simultaneous file
+                        upload
+                      </li>
+                      <li>
+                        <code>POST /api/upload/batch-process</code> - Upload and
+                        analyze
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                  <div class="card-body">
+                    <h6 class="card-title text-success">
+                      <i class="fas fa-cogs me-2"></i>Analysis Endpoints
+                    </h6>
+                    <ul class="list-unstyled small">
+                      <li>
+                        <code>POST /api/evaluate/dual-upload</code> - Cross
+                        analysis
+                      </li>
+                      <li>
+                        <code>POST /api/evaluate/batch-feedback</code> - Bulk
+                        feedback
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Try It Now -->
+          <div class="text-center">
+            <a href="/templates/dashboard.html" class="btn btn-primary btn-lg">
+              <i class="fas fa-rocket me-2"></i>Try the Enhanced Dashboard
+            </a>
+            <p class="text-muted mt-2">
+              Experience the new dual upload system and professional interface
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4 bg-light">
+      <div class="container text-center">
+        <p class="text-muted mb-0">
+          Enhanced Resume Relevance System - Professional dual upload with
+          advanced analysis
+        </p>
+        <p class="small text-muted">
+          Features: Professional UI, Dual Upload, Batch Processing, Enhanced
+          API, Responsive Design
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Relevance Analysis Dashboard</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-chart-bar me-2"></i>
+          Resume Relevance Dashboard
+        </a>
+        <div class="navbar-nav ms-auto">
+          <span class="navbar-text">
+            <i class="fas fa-server me-1"></i>
+            <span id="system-status" class="badge bg-success"
+              >System Online</span
+            >
+          </span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <!-- Upload Section -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <i class="fas fa-upload me-2"></i>File Upload
+              </h5>
+            </div>
+            <div class="card-body">
+              <!-- Job Description Upload -->
+              <div class="upload-section mb-4">
+                <h6 class="text-muted">Job Description</h6>
+                <div class="upload-area" id="job-upload-area">
+                  <i class="fas fa-briefcase fa-2x text-muted mb-2"></i>
+                  <p class="text-muted mb-2">
+                    Drag & drop job description or click to browse
+                  </p>
+                  <button
+                    class="btn btn-outline-primary btn-sm"
+                    onclick="document.getElementById('job-file').click()"
+                  >
+                    Choose File
+                  </button>
+                  <input
+                    type="file"
+                    id="job-file"
+                    accept=".txt,.pdf,.doc,.docx"
+                    style="display: none"
+                  />
+                  <div
+                    class="upload-progress mt-2"
+                    id="job-progress"
+                    style="display: none"
+                  >
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 0%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="upload-status mt-2" id="job-status"></div>
+                </div>
+              </div>
+
+              <!-- Resume Upload -->
+              <div class="upload-section">
+                <h6 class="text-muted">Resume(s)</h6>
+                <div class="upload-area" id="resume-upload-area">
+                  <i class="fas fa-file-alt fa-2x text-muted mb-2"></i>
+                  <p class="text-muted mb-2">
+                    Drag & drop resume(s) or click to browse
+                  </p>
+                  <button
+                    class="btn btn-outline-success btn-sm"
+                    onclick="document.getElementById('resume-file').click()"
+                  >
+                    Choose Files
+                  </button>
+                  <input
+                    type="file"
+                    id="resume-file"
+                    accept=".txt,.pdf,.doc,.docx"
+                    multiple
+                    style="display: none"
+                  />
+                  <div
+                    class="upload-progress mt-2"
+                    id="resume-progress"
+                    style="display: none"
+                  >
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        style="width: 0%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="upload-status mt-2" id="resume-status"></div>
+                </div>
+              </div>
+
+              <!-- Analysis Button -->
+              <div class="mt-4">
+                <button class="btn btn-primary w-100" id="analyze-btn" disabled>
+                  <i class="fas fa-search me-2"></i>Analyze Resumes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Overview -->
+        <div class="col-lg-8 col-md-6 mb-4">
+          <div class="card h-100">
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
+              <h5 class="mb-0">
+                <i class="fas fa-chart-line me-2"></i>Analysis Results
+              </h5>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-sm btn-outline-secondary"
+                  id="export-results"
+                >
+                  <i class="fas fa-download me-1"></i>Export
+                </button>
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  id="clear-results"
+                >
+                  <i class="fas fa-trash me-1"></i>Clear
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="results-container">
+                <div class="text-center text-muted py-5">
+                  <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                  <p class="lead">
+                    Upload files and click "Analyze Resumes" to see results
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Analysis Section -->
+      <div class="row">
+        <!-- Candidate Comparison Table -->
+        <div class="col-lg-8 mb-4">
+          <div class="card">
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
+              <h5 class="mb-0">
+                <i class="fas fa-users me-2"></i>Candidate Comparison
+              </h5>
+              <div class="d-flex gap-2 align-items-center">
+                <label class="text-muted me-2">Sort by:</label>
+                <select
+                  class="form-select form-select-sm"
+                  id="sort-candidates"
+                  style="width: auto"
+                >
+                  <option value="relevance_score">Relevance Score</option>
+                  <option value="skill_match">Skill Match %</option>
+                  <option value="filename">Filename</option>
+                </select>
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  id="toggle-details"
+                >
+                  <i class="fas fa-eye me-1"></i>Details
+                </button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0" id="candidates-table">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Candidate</th>
+                      <th>Relevance Score</th>
+                      <th>Skill Match</th>
+                      <th>Missing Skills</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="candidates-tbody">
+                    <tr>
+                      <td colspan="5" class="text-center text-muted py-4">
+                        No candidates analyzed yet
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualizations -->
+        <div class="col-lg-4 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <i class="fas fa-chart-pie me-2"></i>Skill Gap Analysis
+              </h5>
+            </div>
+            <div class="card-body">
+              <canvas id="skill-gap-chart" width="400" height="300"></canvas>
+              <div class="mt-3">
+                <small class="text-muted">
+                  <i class="fas fa-info-circle me-1"></i>
+                  Shows distribution of missing vs matching skills
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Analysis -->
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <i class="fas fa-cogs me-2"></i>Top Missing Skills
+              </h5>
+            </div>
+            <div class="card-body">
+              <canvas
+                id="missing-skills-chart"
+                width="400"
+                height="200"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <i class="fas fa-trophy me-2"></i>Score Distribution
+              </h5>
+            </div>
+            <div class="card-body">
+              <canvas
+                id="score-distribution-chart"
+                width="400"
+                height="200"
+              ></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters Panel -->
+      <div class="row">
+        <div class="col-12 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <i class="fas fa-filter me-2"></i>Filters & Search
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label class="form-label">Minimum Relevance Score</label>
+                  <input
+                    type="range"
+                    class="form-range"
+                    id="min-score-filter"
+                    min="0"
+                    max="100"
+                    value="0"
+                  />
+                  <div class="d-flex justify-content-between">
+                    <small class="text-muted">0%</small>
+                    <small class="text-muted" id="min-score-value">0%</small>
+                    <small class="text-muted">100%</small>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Required Skills</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="skills-filter"
+                    placeholder="e.g., python, react, aws"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Candidate Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name-filter"
+                    placeholder="Search candidate names"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">&nbsp;</label>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary" id="apply-filters">
+                      Apply Filters
+                    </button>
+                    <button
+                      class="btn btn-outline-secondary"
+                      id="reset-filters"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Candidate Detail Modal -->
+    <div class="modal fade" id="candidate-modal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-user me-2"></i>Candidate Details
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="candidate-details">
+            <!-- Dynamic content will be loaded here -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="compare-candidate"
+            >
+              Compare
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-overlay" id="loading-overlay" style="display: none">
+      <div class="text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="mt-3 text-white">
+          <h5>Analyzing Resumes...</h5>
+          <p>Please wait while we process your files</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/dashboard.js') }}"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+coverage.xml
+*.cover
+.hypothesis/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.pytest_cache
+htmlcov
